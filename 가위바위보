@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위 바위 보 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #choices {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .score {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>가위 바위 보 게임</h1>
+    
+    <div id="choices">
+        <button onclick="play('가위')">가위</button>
+        <button onclick="play('바위')">바위</button>
+        <button onclick="play('보')">보</button>
+    </div>
+
+    <div class="result" id="result"></div>
+    <div class="score" id="score">
+        <p>사용자 승리: <span id="userWins">0</span></p>
+        <p>컴퓨터 승리: <span id="computerWins">0</span></p>
+    </div>
+
+    <script>
+        let userWins = 0;
+        let computerWins = 0;
+
+        function play(userChoice) {
+            const choices = ['가위', '바위', '보'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+            let result = '';
+            if (userChoice === computerChoice) {
+                result = '비겼습니다!';
+            } else if (
+                (userChoice === '가위' && computerChoice === '보') ||
+                (userChoice === '바위' && computerChoice === '가위') ||
+                (userChoice === '보' && computerChoice === '바위')
+            ) {
+                result = '사용자가 이겼습니다!';
+                userWins++;
+            } else {
+                result = '컴퓨터가 이겼습니다!';
+                computerWins++;
+            }
+
+            document.getElementById('result').innerText = `사용자: ${userChoice}, 컴퓨터: ${computerChoice} - ${result}`;
+            document.getElementById('userWins').innerText = userWins;
+            document.getElementById('computerWins').innerText = computerWins;
+        }
+    </script>
+</body>
+</html>
